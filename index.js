@@ -1,6 +1,6 @@
 var finances = [
-  ['Jan-2010', 867884], //diff 984655 - 867884 = x
-  ['Feb-2010', 984655], //
+  ['Jan-2010', 867884],
+  ['Feb-2010', 984655],
   ['Mar-2010', 322013],
   ['Apr-2010', -69417],
   ['May-2010', 310503],
@@ -88,11 +88,10 @@ var finances = [
 ];
 
 var totalNumberMonths = finances.length;
-var totalAmound = 0;
+var totalAmount = 0;
 var average = 0;
 var greatestIncrease = 0;
 var greatestDecrease = 0;
-var netChanges = [];
 var totalNetChanges = 0;
 var greatestIncreaseMonth;
 var greatestDecreaseMonth;
@@ -100,20 +99,20 @@ var greatestDecreaseMonth;
 
 for (i = 0; i < finances.length; i++) {
   var profitLoss = finances[i][1];
-  totalAmound = totalAmound + profitLoss;
-  if (i<finances.length-1){
-  var profitLossNext = finances[i + 1][1];
-  totalNetChanges = totalNetChanges + (profitLossNext - profitLoss);
-  greatestIncrease=Math.max(greatestIncrease, (profitLossNext - profitLoss));
-  if(greatestIncrease===(profitLossNext - profitLoss)){
-    greatestIncreaseMonth=finances[i+1][0]
+  totalAmount = totalAmount + profitLoss;
+  if (i < finances.length - 1) {
+    var profitLossNext = finances[i + 1][1];
+    totalNetChanges = totalNetChanges + (profitLossNext - profitLoss);
+    greatestIncrease = Math.max(greatestIncrease, (profitLossNext - profitLoss));
+    if (greatestIncrease === (profitLossNext - profitLoss)) {
+      greatestIncreaseMonth = finances[i + 1][0]
+    }
+    greatestDecrease = Math.min(greatestDecrease, (profitLossNext - profitLoss));
+    if (greatestDecrease === (profitLossNext - profitLoss)) {
+      greatestDecreaseMonth = finances[i + 1][0];
+    }
   }
-  greatestDecrease=Math.min(greatestDecrease,(profitLossNext - profitLoss));
-  if (greatestDecrease===(profitLossNext - profitLoss)){
-    greatestDecreaseMonth=finances[i+1][0];
-  }
-}
-  
+
 }
 
 average = totalNetChanges / (totalNumberMonths - 1);
@@ -121,7 +120,7 @@ average = totalNetChanges / (totalNumberMonths - 1);
 console.log("Financial Analysis");
 console.log("----------------");
 console.log("Total Months: " + finances.length);
-console.log("Total: $" + totalAmound);
-console.log( "Average Change: " + Math.round(average * 100) / 100);
+console.log("Total: $" + totalAmount);
+console.log("Average Change: " + Math.round(average * 100) / 100);
 console.log("Greatest Increase in Profits/Losses: " + greatestIncreaseMonth + " (" + "$" + greatestIncrease + ")");
 console.log("Greatest Decrease in Profits/Losses: " + greatestDecreaseMonth + " (" + "$" + greatestDecrease + ")");
